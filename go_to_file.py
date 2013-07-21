@@ -1,3 +1,4 @@
+import time
 import sublime
 import sublime_plugin
 import os
@@ -18,7 +19,9 @@ class GoToFile(sublime_plugin.TextCommand):
                 if len(text) == 0:
                     continue
 
+                time_ = time.time()
                 self.potential_files = self.get_filename(text)
+                print(time.time() - time_)
                 if len(self.potential_files) > 0:
                     break
 
@@ -56,19 +59,20 @@ class GoToFile(sublime_plugin.TextCommand):
         return text[open_quote+1:close_quote] if (open_quote > 0 and close_quote > 0) else ''
 
     def get_filename(self, text):
+        re_text = re.compile(text)
         results = []
         directories = self.view.window().folders()
+
         for directory in directories:
-            for dirname, _, files in self.walk(directory):
+            for dirname, files in self.walk(directory):
                 for file in files:
-                    if re.search(text, file):
-                        results += [dirname + os.sep + file]
+                    if re_text.search(file):
+                        results.append(os.path.join(dirname, file))
         return results
 
     def walk(self, directory):
-        for dir, dirnames, files in os.walk(directory):
-            dirnames[:] = [dirname for dirname in dirnames]
-            yield dir, dirnames, files
+        for dirname, _, files in os.walk(directory):
+            yield dirname, files
 
 
 class FileInfo(sublime_plugin.WindowCommand):
