@@ -1,6 +1,8 @@
-import sublime, sublime_plugin
-import os, string
+import sublime
+import sublime_plugin
+import os
 import re
+
 
 class GoToFile(sublime_plugin.TextCommand):
     def run(self, edit):
@@ -21,10 +23,10 @@ class GoToFile(sublime_plugin.TextCommand):
                     break
 
             if len(self.potential_files) > 1:
-                self.view.window().show_quick_panel(self.potential_files, self.open_file)
+                self.view.window().show_quick_panel(self.potential_files,
+                                                    self.open_file)
             elif len(self.potential_files) == 1:
-                print("Opening file '%s'" % (self.potential_files[0]))
-                self.view.window().open_file(self.potential_files[0])
+                self.open_file(0)
             else:
                 sublime.error_message("No file found!")
 
@@ -67,6 +69,7 @@ class GoToFile(sublime_plugin.TextCommand):
         for dir, dirnames, files in os.walk(directory):
             dirnames[:] = [dirname for dirname in dirnames]
             yield dir, dirnames, files
+
 
 class FileInfo(sublime_plugin.WindowCommand):
     def run(self):
