@@ -1,3 +1,8 @@
+Note:
+
+This plugin has some differences that the original: See here: https://github.com/stvkoch/sublime-text-go-to-file/compare/gs:master...master
+
+
 Sublime Text Go To File
 =======================
 
@@ -38,6 +43,14 @@ Go to your Sublime Text 3 `Packages` directory
 
 and clone the repository using the command below:
 
+
+This version:
+``` shell
+git clone https://github.com/stvkoch/sublime-text-go-to-file.git GoToFile
+```
+
+
+Original version without open file from class name:
 ``` shell
 git clone https://github.com/gs/sublime-text-go-to-file.git GoToFile
 ```
@@ -45,3 +58,16 @@ git clone https://github.com/gs/sublime-text-go-to-file.git GoToFile
 Note
 ----
 Please open an issue at https://github.com/gs/sublime-text-go-to-file if you discover a problem or would like to see a feature/change implemented.
+
+
+Big Thanks to...
+----------------
+
+@stvkoch  - who improved the plugin a LOT!
+
+
+Try:
+----
+ - select namespace and click alt+d
+ - click on word of class name and click alt+d
+ - click on path of template file and click alt+d
